@@ -1,0 +1,66 @@
+Crie a homepage completa da Felicio Cleaning otimizada para conversão por telefone:
+
+HEADER FIXO:
+- Logo Felicio
+- Menu: Home | Serviços | Áreas | Blog | Sobre | Contato
+- Telefone destaque: (470) 952-9626 (clicável, ícone phone)
+- Botão CTA: "Ligar Agora"
+
+HERO SECTION:
+- Background: Imagem profissional de limpeza
+- H1: "Limpeza Profissional que Transforma Seu Espaço"
+- H2: "Serviços Residenciais e Comerciais em East Cobb & Woodstock"
+- 2 CTAs grandes:
+  * "☎ Ligar Agora: (470) 952-9626"
+  * "Solicitar Orçamento Grátis"
+- 3 Badges: "✓ Satisfação Garantida" | "✓ Equipe Treinada" | "✓ Eco-Friendly"
+
+SERVIÇOS (Grid 3x2):
+1. Limpeza Residencial
+2. Limpeza Comercial  
+3. Deep Cleaning
+4. Move-In/Move-Out
+5. Pós-Construção
+6. Cuidados com Pisos
+
+Cada card: ícone, título, 2 linhas de descrição, "Ligar para saber mais"
+
+POR QUE ESCOLHER FELICIO (4 colunas com ícones):
+- 🏆 Profissionais Certificados
+- 🌿 Produtos Ecológicos
+- ⭐ 100% Satisfação Garantida
+- 🕐 Horários Flexíveis
+
+COMO FUNCIONA (4 passos horizontais):
+1. 📞 Ligue e Fale com Especialista
+2. 💰 Receba Orçamento Personalizado
+3. 📅 Escolha Data e Horário
+4. ✨ Aproveite Seu Espaço Limpo
+
+DEPOIMENTOS (Carrossel):
+6 reviews com: foto, nome, localização, 5 estrelas, texto
+Botão embaixo: "Seja o próximo cliente satisfeito - Ligue Agora"
+
+ÁREAS ATENDIDAS:
+- 2 cards com imagens: East Cobb | Woodstock
+- Cada um com endereço e telefone
+- "Ver todas as áreas atendidas"
+
+ÚLTIMOS POSTS DO BLOG (3 cards):
+- Imagem, categoria, título, data, "Ler mais"
+- Botão: "Ver todos os posts"
+
+SEÇÃO FINAL CTA:
+- Background colorido
+- "Pronto para Ter um Espaço Impecável?"
+- "Ligue agora e agende sua limpeza: (470) 952-9626"
+- Botão gigante: "☎ LIGAR AGORA"
+- Texto: "Atendimento: Seg-Sex 8h-18h | Sáb 9h-14h"
+
+FOOTER:
+Coluna 1 - Serviços | Coluna 2 - Empresa | Coluna 3 - Contato | Coluna 4 - Social
+Telefone repetido: (470) 952-9626
+Email profissional: contato@feliciocleaning.com
+
+Design: Navy blue (#1B3B6F) + branco, moderno, clean, CTAs em destaque laranja/azul claro
+Mobile-first, animações suaves, tipografia legível
