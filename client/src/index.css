@@ -40,42 +40,39 @@
   --font-sans: 'Open Sans', sans-serif;
   --font-heading: 'Montserrat', sans-serif;
   
-  --radius: 0.5rem;
+  --radius: 1rem;
 }
 
-/* LIGHT MODE */
+/* 2026 PREMIUM DARK MODE DESIGN SYSTEM */
 :root {
-  /* Base */
-  --background: 0 0% 100%;
-  --foreground: 217 61% 15%; /* Dark Navy Text */
+  --background: 220 20% 4%;
+  --foreground: 210 20% 98%;
 
-  /* Components */
-  --card: 0 0% 100%;
-  --card-foreground: 217 61% 15%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 217 61% 15%;
+  --card: 220 20% 6%;
+  --card-foreground: 210 20% 98%;
+  --popover: 220 20% 6%;
+  --popover-foreground: 210 20% 98%;
 
-  /* Brand Colors */
-  --primary: 217 61% 27%; /* #1B3B6F Navy Blue */
+  --primary: 210 100% 60%; /* Electric Blue */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 210 20% 96%; /* Very light blue/grey for backgrounds */
-  --secondary-foreground: 217 61% 27%;
+  --secondary: 220 15% 10%;
+  --secondary-foreground: 210 100% 60%;
 
-  --accent: 21 89% 52%; /* Orange CTA */
+  --accent: 280 100% 70%; /* Soft Purple Neon */
   --accent-foreground: 0 0% 100%;
 
-  --muted: 210 20% 96%;
-  --muted-foreground: 215 20% 45%;
+  --muted: 220 15% 10%;
+  --muted-foreground: 215 15% 65%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 220 13% 91%;
-  --input: 220 13% 91%;
-  --ring: 217 61% 27%;
+  --border: 220 15% 15%;
+  --input: 220 15% 15%;
+  --ring: 210 100% 60%;
   
-  --radius: 0.5rem;
+  --radius: 1rem;
 }
 
 @layer base {
@@ -83,9 +80,21 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/30;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold text-primary;
+    @apply font-heading font-bold tracking-tight text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white to-white/40 bg-clip-text text-transparent;
+  }
+  .neon-glow {
+    box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.5);
   }
 }
