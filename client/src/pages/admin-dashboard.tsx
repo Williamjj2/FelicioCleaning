@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
+import { supabase } from "@/lib/supabase";
 import {
-    LayoutDashboard,
     Image as ImageIcon,
     Save,
     LogOut,
@@ -11,14 +10,17 @@ import {
     Users,
     Briefcase,
     Grid,
-    Plus
+    Plus,
+    DollarSign
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { ImageUploader } from "@/components/admin/ImageUploader";
+import { PricingMatrix } from "@/components/admin/PricingMatrix";
+import { AddonsManager } from "@/components/admin/AddonsManager";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
 // Types based on the new schema
 interface SiteContent {
@@ -52,36 +54,77 @@ interface SiteContent {
 }
 
 export default function AdminDashboard() {
-    const [activeTab, setActiveTab] = useState<'home' | 'about' | 'services' | 'portfolio' | 'transformations'>('home');
+    const [activeTab, setActiveTab] = useState<'home' | 'about' | 'services' | 'portfolio' | 'transformations' | 'pricing'>('home');
     const [content, setContent] = useState<SiteContent>({});
     const [isSaving, setIsSaving] = useState(false);
     const { toast } = useToast();
     const [, setLocation] = useLocation();
+    const pricingMatrixRef = useRef<{ save: () => Promise<void> }>(null);
+    const addonsManagerRef = useRef<{ save: () => Promise<void> }>(null);
 
-    // Fetch Content
+    // Fetch Content from Supabase
     useEffect(() => {
-        fetch('/api/site-content')
-            .then(res => res.json())
-            .then(data => setContent(data))
-            .catch(err => toast({ title: "Error", description: "Failed to load content", variant: "destructive" }));
+        const fetchContent = async () => {
+            const { data, error } = await supabase
+                .from('site_content')
+                .select('content')
+                .single();
+
+            if (error) {
+                console.error("Error fetching content:", error);
+                toast({ title: "Error", description: "Failed to load content from Supabase. Check RLS or Table.", variant: "destructive" });
+            } else if (data) {
+                console.log("Content fetched successfully:", data.content ? "Data exists" : "Empty content");
+                if (data.content) setContent(data.content);
+            } else {
+                console.log("No data returned from Supabase single select.");
+            }
+        };
+
+        fetchContent();
     }, []);
 
-    // Save Content
+    // Save Content to Supabase
     const handleSave = async () => {
         setIsSaving(true);
+        console.log("Attempting to save content:", content);
         try {
-            const res = await fetch('/api/site-content', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(content)
+            // Upsert the content for ID 1
+            const { data, error } = await supabase
+                .from('site_content')
+                .upsert({ id: 1, content: content })
+                .select();
+
+            if (error) {
+                console.error("Supabase Save Error:", error);
+                throw error;
+            }
+
+            console.log("Save successful:", data);
+
+            // Also trigger pricing/addons save if we are on the pricing tab
+            if (activeTab === 'pricing') {
+                if (pricingMatrixRef.current) await pricingMatrixRef.current.save();
+                if (addonsManagerRef.current) await addonsManagerRef.current.save();
+            }
+
+            toast({ title: "Success", description: "Changes saved to Supabase successfully!" });
+        } catch (error: any) {
+            console.error("Detailed error saving content:", error);
+            toast({
+                title: "Save Failed",
+                description: error.message || "Could not save changes. Check console for details.",
+                variant: "destructive"
             });
-            if (!res.ok) throw new Error("Failed to save");
-            toast({ title: "Success", description: "Changes saved successfully" });
-        } catch (error) {
-            toast({ title: "Error", description: "Failed to save changes", variant: "destructive" });
         } finally {
             setIsSaving(false);
         }
+    };
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut();
+        localStorage.removeItem("check_role");
+        setLocation("/login");
     };
 
     const updateContent = (path: string[], value: any) => {
@@ -95,17 +138,6 @@ export default function AdminDashboard() {
             current[path[path.length - 1]] = value;
             return newData;
         });
-    };
-
-    const handleDownload = () => {
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(content, null, 2));
-        const downloadAnchorNode = document.createElement('a');
-        downloadAnchorNode.setAttribute("href", dataStr);
-        downloadAnchorNode.setAttribute("download", "site-content.json");
-        document.body.appendChild(downloadAnchorNode); // required for firefox
-        downloadAnchorNode.click();
-        downloadAnchorNode.remove();
-        toast({ title: "Downloaded", description: "site-content.json downloaded successfully" });
     };
 
     return (
@@ -151,10 +183,20 @@ export default function AdminDashboard() {
                     >
                         <ImageIcon className="mr-2 h-4 w-4" /> Transformations
                     </Button>
+                    <Button
+                        variant={activeTab === 'pricing' ? "default" : "ghost"}
+                        className="w-full justify-start"
+                        onClick={() => setActiveTab('pricing')}
+                    >
+                        <DollarSign className="mr-2 h-4 w-4" /> Pricing Matrix
+                    </Button>
                 </nav>
                 <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
-                    <Button variant="destructive" className="w-full" onClick={() => setLocation('/')}>
-                        <LogOut className="mr-2 h-4 w-4" /> Exit to Site
+                    <Button variant="destructive" className="w-full" onClick={handleSignOut}>
+                        <LogOut className="mr-2 h-4 w-4" /> Sign Out
+                    </Button>
+                    <Button variant="ghost" className="w-full mt-2" onClick={() => setLocation('/')}>
+                        Exit to Site
                     </Button>
                 </div>
             </aside>
@@ -163,13 +205,6 @@ export default function AdminDashboard() {
             <main className="ml-64 flex-1 p-8">
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-3xl font-bold capitalize">{activeTab} Management</h2>
-                    <Button
-                        variant="outline"
-                        onClick={handleDownload}
-                        className="gap-2"
-                    >
-                        <Save className="h-4 w-4" /> Export JSON
-                    </Button>
                 </div>
 
                 <div className="grid gap-8 max-w-5xl mx-auto">
@@ -468,21 +503,24 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     )}
+                    {/* PRICING EDITOR */}
+                    {activeTab === 'pricing' && (
+                        <div className="space-y-8">
+                            <PricingMatrix
+                                ref={pricingMatrixRef}
+                                tenantId="2b8a73ab-88e9-4607-9391-fc62a0d10513"
+                            />
+                            <AddonsManager
+                                ref={addonsManagerRef}
+                                tenantId="2b8a73ab-88e9-4607-9391-fc62a0d10513"
+                            />
+                        </div>
+                    )}
                 </div>
             </main>
 
             {/* Bottom Save Bar */}
             <div className="fixed bottom-0 left-64 right-0 p-4 border-t border-white/10 bg-card/80 backdrop-blur-xl z-50 flex justify-end items-center gap-4">
-                <span className="text-sm text-muted-foreground mr-auto">
-                    Changes are local until saved. Use "Export JSON" for production updates.
-                </span>
-                <Button
-                    onClick={handleDownload}
-                    variant="secondary"
-                    className="shadow-md"
-                >
-                    <Save className="mr-2 h-4 w-4" /> Export JSON
-                </Button>
                 <Button
                     onClick={handleSave}
                     size="lg"

@@ -49,8 +49,9 @@ export const QuoteForm = ({ isOpen, onClose, isInline = false }: QuoteFormProps)
                 body: encode({
                     "form-name": "quote-request",
                     ...formData,
-                    "smsConsent": smsConsent ? "yes" : "no",
-                    "smsConsentTimestamp": smsConsent ? new Date().toISOString() : ""
+                    "sms_consent": smsConsent ? "yes" : "no",
+                    "sms_opt_in": smsConsent ? "true" : "false",
+                    "sms_consent_timestamp": smsConsent ? new Date().toISOString() : ""
                 })
             });
 
@@ -243,19 +244,20 @@ export const QuoteForm = ({ isOpen, onClose, isInline = false }: QuoteFormProps)
                         />
                     </div>
 
-                    {/* SMS Consent Checkbox */}
+                    {/* SMS Consent Checkbox (Optional - NOT required for submission) */}
                     <div className="space-y-4 pt-2">
                         <div className="flex items-start gap-3">
                             <input
                                 type="checkbox"
                                 id="smsConsent"
-                                name="smsConsent"
+                                name="sms_consent"
+                                value="yes"
                                 checked={smsConsent}
                                 onChange={(e) => setSmsConsent(e.target.checked)}
                                 className="mt-1 w-5 h-5 rounded border-white/10 bg-white/5 text-primary focus:ring-primary focus:ring-offset-0"
                             />
                             <label htmlFor="smsConsent" className="text-xs text-white/70 leading-relaxed cursor-pointer select-none">
-                                I agree to receive service-related text messages (SMS) from Felicio Cleaning about quotes, appointments, reminders and customer support. Message and data rates may apply. Message frequency varies. Reply STOP to cancel, HELP for help.
+                                <span className="font-bold text-white/90">(Optional)</span> I agree to receive recurring SMS text messages from Felicio Cleaning Services, including appointment reminders, quote follow-ups, promotions, and customer support updates. Consent is not a condition of purchase or service. Message frequency varies (up to 6 msgs/month). Message &amp; data rates may apply. Reply STOP to unsubscribe or HELP for help at any time. See our <a href="/privacy-policy" className="underline text-primary hover:text-primary/80">Privacy Policy</a> and <a href="/terms-and-conditions" className="underline text-primary hover:text-primary/80">Terms &amp; Conditions</a>.
                             </label>
                         </div>
                     </div>
@@ -283,6 +285,9 @@ export const QuoteForm = ({ isOpen, onClose, isInline = false }: QuoteFormProps)
                         )}
                     </Button>
 
+                    <p className="text-xs text-white/60 text-center leading-relaxed">
+                        Submitting this form does not require SMS consent. You will receive your quote regardless of whether you opt in to text messages.
+                    </p>
                     <p className="text-[10px] text-white/30 text-center leading-relaxed">
                         By submitting this form, you agree to our <a href="/terms-and-conditions" className="underline hover:text-primary transition-colors">Terms & Conditions</a> and <a href="/privacy-policy" className="underline hover:text-primary transition-colors">Privacy Policy</a>.
                     </p>

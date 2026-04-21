@@ -248,30 +248,38 @@ export default function TermsAndConditionsPage() {
 
                     <hr className="border-white/5" />
 
-                    {/* SMS / Electronic Communications */}
+                    {/* SMS Messaging Terms */}
                     <section>
                         <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-6">
-                            SMS / Electronic Communications
+                            SMS Messaging Terms
                         </h2>
                         <p className="mb-4">
-                            SMS communications from Felicio Cleaning Services are optional and require your explicit opt-in. Consent to receive SMS messages is not a condition of purchasing any goods or services from us.
+                            By opting in to receive text messages from Felicio Cleaning Services, you agree to receive recurring automated SMS messages, including appointment reminders, quote follow-ups, promotions, service updates, rescheduling notifications, and customer support responses, at the mobile number you provided.
                         </p>
-                        <p className="mb-4">
-                            When you expressly opt in to SMS (for example, by checking the SMS consent box on our website quote form, or by otherwise providing documented consent), you may receive text messages related to quotes, booking confirmations, appointment reminders, rescheduling, follow-ups, satisfaction surveys, and customer support for our cleaning services. These communications are transactional and service-related; they are not bulk marketing messages.
+                        <ul className="list-disc list-inside space-y-3 pl-2 mb-4">
+                            <li>
+                                <strong className="text-white/90">Program name:</strong> Felicio Cleaning Services SMS Notifications
+                            </li>
+                            <li>
+                                <strong className="text-white/90">Message frequency:</strong> Varies based on customer activity — typically up to 6 messages per month
+                            </li>
+                            <li>
+                                <strong className="text-white/90">Cost:</strong> Message and data rates may apply, depending on your carrier plan
+                            </li>
+                            <li>
+                                <strong className="text-white/90">Opt-out:</strong> Reply STOP at any time to unsubscribe. You will receive a confirmation message.
+                            </li>
+                            <li>
+                                <strong className="text-white/90">Help:</strong> Reply HELP for assistance, or contact <a href="mailto:support@feliciocleaning.com" className="text-primary hover:underline underline-offset-4">support@feliciocleaning.com</a>
+                            </li>
+                            <li>
+                                <strong className="text-white/90">Supported carriers:</strong> AT&amp;T, Verizon Wireless, T-Mobile, Sprint, U.S. Cellular, and other major and minor US carriers. Carriers are not liable for delayed or undelivered messages.
+                            </li>
+                        </ul>
+                        <p className="font-bold text-white">
+                            Consent is not a condition of purchase or any service provided by Felicio Cleaning Services.
                         </p>
-                        <p className="mb-4">
-                            Message frequency varies. Message and data rates may apply, depending on your mobile plan.
-                        </p>
-                        <p className="mb-4">
-                            <strong className="text-white/90">Opt-out:</strong> You may opt out of SMS communications at any time by replying <strong className="text-white/90">STOP</strong> to any message. You will receive a confirmation of your opt-out.
-                        </p>
-                        <p className="mb-4">
-                            <strong className="text-white/90">Help:</strong> Reply <strong className="text-white/90">HELP</strong> to any message for assistance, or contact us at (770) 407-7858.
-                        </p>
-                        <p className="mb-4">
-                            Carriers are not liable for any delayed or undelivered messages.
-                        </p>
-                        <p>
+                        <p className="mt-4">
                             For more information on how we handle your data, please review our <Link href="/privacy-policy" className="text-primary hover:underline underline-offset-4 font-semibold">Privacy Policy</Link>.
                         </p>
                     </section>

@@ -145,19 +145,22 @@ export default function PrivacyPolicyPage() {
 
                     <hr className="border-white/5" />
 
-                    {/* Text Messaging (SMS) */}
+                    {/* SMS / Text Messaging Privacy */}
                     <section>
                         <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-6">
-                            Text Messaging (SMS)
+                            SMS / Text Messaging Privacy
                         </h2>
                         <p className="mb-4">
-                            When you provide your phone number to us, we may send you text messages (SMS) related to quotes, booking confirmations, appointment reminders, rescheduling, follow-ups and customer support for our cleaning services. These messages are service-related and not for bulk promotional campaigns.
+                            Felicio Cleaning Services collects mobile phone numbers and SMS consent information solely for the purpose of sending text messages directly related to our services, including appointment reminders, quote follow-ups, promotions, service updates, and customer support.
+                        </p>
+                        <p className="mb-4 font-bold text-white">
+                            No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All categories of personal information exclude mobile opt-in data and consent; this information will not be shared with any third parties.
+                        </p>
+                        <p className="mb-4">
+                            SMS consent is optional and is never a condition of purchase, service delivery, or any transaction with Felicio Cleaning Services. Users may opt out at any time by replying STOP to any message received, or request help by replying HELP. Message and data rates may apply. Message frequency varies.
                         </p>
                         <p>
-                            We use third-party providers (such as Twilio) to deliver these messages. Message and data rates may apply, depending on your mobile plan. You can opt out of SMS messages at any time by replying STOP to any message. You may also contact us if you have questions about SMS communications.
-                        </p>
-                        <p className="mt-4">
-                            Mobile information and SMS opt-in data (including your phone number and consent) will not be shared with any third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. SMS opt-in data is used solely to deliver the service-related text messages described above.
+                            To request deletion of your phone number and SMS data, contact us at <a href="mailto:support@feliciocleaning.com" className="text-primary hover:underline underline-offset-4">support@feliciocleaning.com</a>.
                         </p>
                     </section>
 

@@ -1,6 +1,27 @@
 node_modules
 dist
+dist_v2
 .DS_Store
 server/public
 vite.config.ts.*
 *.tar.gz
+# Local Netlify folder
+.netlify
+# Environment files
+.env
+client/.env
+.env.*
+# Local dev
+.local/
+.replit
+# Temp files
+*.csv
+*.sql
+*.json.bak
+attached_assets/
+analyze_images.js
+elevenlabs_payload.json
+system_prompt_final.txt
+template_*.json
+felicio_*.json
+skills/
