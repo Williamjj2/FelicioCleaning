@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
                 </motion.h1>
 
                 <p className="text-center text-white/40 text-sm font-bold uppercase tracking-[0.3em] mb-20">
-                    Last updated: April 20, 2026
+                    Last updated: April 28, 2026
                 </p>
 
                 {/* Content */}
@@ -151,7 +151,7 @@ export default function PrivacyPolicyPage() {
                             SMS / Text Messaging Privacy
                         </h2>
                         <p className="mb-4">
-                            Felicio Cleaning Services collects mobile phone numbers and SMS consent information solely for the purpose of sending text messages directly related to our services, including appointment reminders, quote follow-ups, promotions, service updates, and customer support.
+                            Felicio Cleaning Services collects mobile phone numbers and SMS consent information solely for the purpose of sending transactional text messages directly related to our services, including appointment confirmations, appointment reminders, rescheduling notifications, quote follow-ups, service updates, and customer support. We do not send marketing or promotional SMS messages.
                         </p>
                         <p className="mb-4 font-bold text-white">
                             No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All categories of personal information exclude mobile opt-in data and consent; this information will not be shared with any third parties.
